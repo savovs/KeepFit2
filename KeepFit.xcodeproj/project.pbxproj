@@ -7,23 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		740B484620588C5800A839B6 /* Goal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740B484120588C5800A839B6 /* Goal+CoreDataProperties.swift */; };
+		740B484720588C5800A839B6 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740B484220588C5800A839B6 /* Goal+CoreDataClass.swift */; };
 		746AB06420588BCA00D624CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746AB06320588BCA00D624CE /* AppDelegate.swift */; };
-		746AB06620588BCA00D624CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746AB06520588BCA00D624CE /* ViewController.swift */; };
 		746AB06920588BCA00D624CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746AB06720588BCA00D624CE /* Main.storyboard */; };
 		746AB06C20588BCA00D624CE /* KeepFit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 746AB06A20588BCA00D624CE /* KeepFit.xcdatamodeld */; };
 		746AB06E20588BCA00D624CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 746AB06D20588BCA00D624CE /* Assets.xcassets */; };
 		746AB07120588BCA00D624CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746AB06F20588BCA00D624CE /* LaunchScreen.storyboard */; };
+		74AD84A020588F1100A0A547 /* HistoryPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD849B20588F1100A0A547 /* HistoryPageCell.swift */; };
+		74AD84A120588F1100A0A547 /* MainPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD849C20588F1100A0A547 /* MainPageCell.swift */; };
+		74AD84A320588F1100A0A547 /* OtherPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD849E20588F1100A0A547 /* OtherPageCell.swift */; };
+		74AD84A420588F1100A0A547 /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD849F20588F1100A0A547 /* SwipeController.swift */; };
+		74AD84A720588F4700A0A547 /* GoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84A520588F4700A0A547 /* GoalController.swift */; };
+		74AD84A820588F4700A0A547 /* GoalPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84A620588F4700A0A547 /* GoalPageCell.swift */; };
+		74AD84B02058909400A0A547 /* PickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84AF2058909400A0A547 /* PickerController.swift */; };
+		74AD84B2205890BE00A0A547 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84B1205890BE00A0A547 /* Persistance.swift */; };
+		EBAFA10ED19F59803FA92425 /* Pods_KeepFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13426CA4F2B715FAF590CB80 /* Pods_KeepFit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13426CA4F2B715FAF590CB80 /* Pods_KeepFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeepFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		184EB68C8E2CD8A39A1884DE /* Pods-KeepFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeepFit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KeepFit/Pods-KeepFit.debug.xcconfig"; sourceTree = "<group>"; };
+		740B484120588C5800A839B6 /* Goal+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		740B484220588C5800A839B6 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		746AB06020588BCA00D624CE /* KeepFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		746AB06320588BCA00D624CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		746AB06520588BCA00D624CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		746AB06820588BCA00D624CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		746AB06B20588BCA00D624CE /* KeepFit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KeepFit.xcdatamodel; sourceTree = "<group>"; };
 		746AB06D20588BCA00D624CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		746AB07020588BCA00D624CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		746AB07220588BCA00D624CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74AD849B20588F1100A0A547 /* HistoryPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryPageCell.swift; sourceTree = "<group>"; };
+		74AD849C20588F1100A0A547 /* MainPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageCell.swift; sourceTree = "<group>"; };
+		74AD849E20588F1100A0A547 /* OtherPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherPageCell.swift; sourceTree = "<group>"; };
+		74AD849F20588F1100A0A547 /* SwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeController.swift; sourceTree = "<group>"; };
+		74AD84A520588F4700A0A547 /* GoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoalController.swift; path = /Users/vlady/Documents/GitHub/KeepFit/KeepFit/GoalPage/GoalController.swift; sourceTree = "<absolute>"; };
+		74AD84A620588F4700A0A547 /* GoalPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoalPageCell.swift; path = /Users/vlady/Documents/GitHub/KeepFit/KeepFit/GoalPage/GoalPageCell.swift; sourceTree = "<absolute>"; };
+		74AD84AF2058909400A0A547 /* PickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerController.swift; path = KeepFit/PickerController.swift; sourceTree = SOURCE_ROOT; };
+		74AD84B1205890BE00A0A547 /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		88292D7024D1D4B0A90AE7F3 /* Pods-KeepFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeepFit.release.xcconfig"; path = "Pods/Target Support Files/Pods-KeepFit/Pods-KeepFit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +53,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBAFA10ED19F59803FA92425 /* Pods_KeepFit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		055307C7D24D3FBF5315C71F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				184EB68C8E2CD8A39A1884DE /* Pods-KeepFit.debug.xcconfig */,
+				88292D7024D1D4B0A90AE7F3 /* Pods-KeepFit.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2DFCEE455B66958EC3D28D5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				13426CA4F2B715FAF590CB80 /* Pods_KeepFit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		746AB05720588BCA00D624CE = {
 			isa = PBXGroup;
 			children = (
 				746AB06220588BCA00D624CE /* KeepFit */,
 				746AB06120588BCA00D624CE /* Products */,
+				055307C7D24D3FBF5315C71F /* Pods */,
+				2DFCEE455B66958EC3D28D5C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +98,48 @@
 		746AB06220588BCA00D624CE /* KeepFit */ = {
 			isa = PBXGroup;
 			children = (
+				74AD84AA20588FB800A0A547 /* Main */,
+				740B484220588C5800A839B6 /* Goal+CoreDataClass.swift */,
+				740B484120588C5800A839B6 /* Goal+CoreDataProperties.swift */,
 				746AB06320588BCA00D624CE /* AppDelegate.swift */,
-				746AB06520588BCA00D624CE /* ViewController.swift */,
 				746AB06720588BCA00D624CE /* Main.storyboard */,
 				746AB06D20588BCA00D624CE /* Assets.xcassets */,
 				746AB06F20588BCA00D624CE /* LaunchScreen.storyboard */,
 				746AB07220588BCA00D624CE /* Info.plist */,
 				746AB06A20588BCA00D624CE /* KeepFit.xcdatamodeld */,
+				74AD84B1205890BE00A0A547 /* Persistance.swift */,
 			);
 			path = KeepFit;
+			sourceTree = "<group>";
+		};
+		74AD84AA20588FB800A0A547 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				74AD84AB20588FC300A0A547 /* GoalPage */,
+				74AD849B20588F1100A0A547 /* HistoryPageCell.swift */,
+				74AD84AC20588FD300A0A547 /* MainPage */,
+				74AD849E20588F1100A0A547 /* OtherPageCell.swift */,
+				74AD849F20588F1100A0A547 /* SwipeController.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		74AD84AB20588FC300A0A547 /* GoalPage */ = {
+			isa = PBXGroup;
+			children = (
+				74AD84A520588F4700A0A547 /* GoalController.swift */,
+				74AD84A620588F4700A0A547 /* GoalPageCell.swift */,
+			);
+			path = GoalPage;
+			sourceTree = "<group>";
+		};
+		74AD84AC20588FD300A0A547 /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				74AD84AF2058909400A0A547 /* PickerController.swift */,
+				74AD849C20588F1100A0A547 /* MainPageCell.swift */,
+			);
+			path = MainPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +149,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 746AB07520588BCA00D624CE /* Build configuration list for PBXNativeTarget "KeepFit" */;
 			buildPhases = (
+				051BCEDBE4E1543D99AEEBA9 /* [CP] Check Pods Manifest.lock */,
 				746AB05C20588BCA00D624CE /* Sources */,
 				746AB05D20588BCA00D624CE /* Frameworks */,
 				746AB05E20588BCA00D624CE /* Resources */,
+				F4527E6183A3DA071A8052C4 /* [CP] Embed Pods Frameworks */,
+				48807FEE94B4E84693837AC8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -134,14 +212,77 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		051BCEDBE4E1543D99AEEBA9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KeepFit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		48807FEE94B4E84693837AC8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KeepFit/Pods-KeepFit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4527E6183A3DA071A8052C4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-KeepFit/Pods-KeepFit-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KeepFit/Pods-KeepFit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		746AB05C20588BCA00D624CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				746AB06620588BCA00D624CE /* ViewController.swift in Sources */,
+				74AD84A320588F1100A0A547 /* OtherPageCell.swift in Sources */,
+				74AD84B2205890BE00A0A547 /* Persistance.swift in Sources */,
+				74AD84A820588F4700A0A547 /* GoalPageCell.swift in Sources */,
+				74AD84B02058909400A0A547 /* PickerController.swift in Sources */,
+				740B484620588C5800A839B6 /* Goal+CoreDataProperties.swift in Sources */,
+				740B484720588C5800A839B6 /* Goal+CoreDataClass.swift in Sources */,
+				74AD84A720588F4700A0A547 /* GoalController.swift in Sources */,
 				746AB06420588BCA00D624CE /* AppDelegate.swift in Sources */,
+				74AD84A020588F1100A0A547 /* HistoryPageCell.swift in Sources */,
 				746AB06C20588BCA00D624CE /* KeepFit.xcdatamodeld in Sources */,
+				74AD84A420588F1100A0A547 /* SwipeController.swift in Sources */,
+				74AD84A120588F1100A0A547 /* MainPageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +417,7 @@
 		};
 		746AB07620588BCA00D624CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 184EB68C8E2CD8A39A1884DE /* Pods-KeepFit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -291,6 +433,7 @@
 		};
 		746AB07720588BCA00D624CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88292D7024D1D4B0A90AE7F3 /* Pods-KeepFit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
