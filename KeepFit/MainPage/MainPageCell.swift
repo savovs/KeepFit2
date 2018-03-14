@@ -1,8 +1,6 @@
 import UIKit
 
 class MainPageCell : UICollectionViewCell {
-    let goals: [String] = ["1000 Steps", "2000 Steps", "3000 Steps", "4000 Steps", "5000 Steps"]
-
     let mainImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "squirrel"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +27,8 @@ class MainPageCell : UICollectionViewCell {
     
     let goalPickerView: PickerController = {
         let pickerView = PickerController()
-        pickerView.goals = ["1000 Steps", "2000 Steps", "3000 Steps", "4000 Steps", "5000 Steps"]
+
+        pickerView.goals = [50, 100, 500, 1000, 2000, 3000, 4000, 5000].map { "\($0) Steps" }
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         
         return pickerView
@@ -50,9 +49,14 @@ class MainPageCell : UICollectionViewCell {
     }()
     
     @objc func addGoal(button: UIButton) {
-        descriptionTextView.text = "Goal: \(goals[goalPickerView.selectedRow(inComponent: 0)])"
+        let targets: [Int16] = [50, 100, 500, 1000, 2000, 3000, 4000, 5000]
+        let index = goalPickerView.selectedRow(inComponent: 0)
+        
+        descriptionTextView.text = "Goal added: \(targets[index]) steps"
         descriptionTextView.isHidden = false
         mainImageView.isHidden = false
+
+        Persistence.addGoal(name: "Hello", target: targets[index])
     }
 
     override init(frame: CGRect) {

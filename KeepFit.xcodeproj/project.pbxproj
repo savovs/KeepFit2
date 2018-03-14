@@ -14,14 +14,14 @@
 		746AB06C20588BCA00D624CE /* KeepFit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 746AB06A20588BCA00D624CE /* KeepFit.xcdatamodeld */; };
 		746AB06E20588BCA00D624CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 746AB06D20588BCA00D624CE /* Assets.xcassets */; };
 		746AB07120588BCA00D624CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746AB06F20588BCA00D624CE /* LaunchScreen.storyboard */; };
+		748E1C1B205999F50058C971 /* GoalTableControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748E1C1A205999F50058C971 /* GoalTableControler.swift */; };
 		74AD84A020588F1100A0A547 /* HistoryPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD849B20588F1100A0A547 /* HistoryPageCell.swift */; };
 		74AD84A120588F1100A0A547 /* MainPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD849C20588F1100A0A547 /* MainPageCell.swift */; };
 		74AD84A320588F1100A0A547 /* OtherPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD849E20588F1100A0A547 /* OtherPageCell.swift */; };
 		74AD84A420588F1100A0A547 /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD849F20588F1100A0A547 /* SwipeController.swift */; };
-		74AD84A720588F4700A0A547 /* GoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84A520588F4700A0A547 /* GoalController.swift */; };
 		74AD84A820588F4700A0A547 /* GoalPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84A620588F4700A0A547 /* GoalPageCell.swift */; };
 		74AD84B02058909400A0A547 /* PickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84AF2058909400A0A547 /* PickerController.swift */; };
-		74AD84B2205890BE00A0A547 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84B1205890BE00A0A547 /* Persistance.swift */; };
+		74AD84B2205890BE00A0A547 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84B1205890BE00A0A547 /* Persistence.swift */; };
 		EBAFA10ED19F59803FA92425 /* Pods_KeepFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13426CA4F2B715FAF590CB80 /* Pods_KeepFit.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,14 +37,14 @@
 		746AB06D20588BCA00D624CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		746AB07020588BCA00D624CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		746AB07220588BCA00D624CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		748E1C1A205999F50058C971 /* GoalTableControler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTableControler.swift; sourceTree = "<group>"; };
 		74AD849B20588F1100A0A547 /* HistoryPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryPageCell.swift; sourceTree = "<group>"; };
 		74AD849C20588F1100A0A547 /* MainPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageCell.swift; sourceTree = "<group>"; };
 		74AD849E20588F1100A0A547 /* OtherPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherPageCell.swift; sourceTree = "<group>"; };
 		74AD849F20588F1100A0A547 /* SwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeController.swift; sourceTree = "<group>"; };
-		74AD84A520588F4700A0A547 /* GoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoalController.swift; path = /Users/vlady/Documents/GitHub/KeepFit/KeepFit/GoalPage/GoalController.swift; sourceTree = "<absolute>"; };
 		74AD84A620588F4700A0A547 /* GoalPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoalPageCell.swift; path = /Users/vlady/Documents/GitHub/KeepFit/KeepFit/GoalPage/GoalPageCell.swift; sourceTree = "<absolute>"; };
 		74AD84AF2058909400A0A547 /* PickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerController.swift; path = KeepFit/PickerController.swift; sourceTree = SOURCE_ROOT; };
-		74AD84B1205890BE00A0A547 /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		74AD84B1205890BE00A0A547 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		88292D7024D1D4B0A90AE7F3 /* Pods-KeepFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeepFit.release.xcconfig"; path = "Pods/Target Support Files/Pods-KeepFit/Pods-KeepFit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,7 +107,7 @@
 				746AB06F20588BCA00D624CE /* LaunchScreen.storyboard */,
 				746AB07220588BCA00D624CE /* Info.plist */,
 				746AB06A20588BCA00D624CE /* KeepFit.xcdatamodeld */,
-				74AD84B1205890BE00A0A547 /* Persistance.swift */,
+				74AD84B1205890BE00A0A547 /* Persistence.swift */,
 			);
 			path = KeepFit;
 			sourceTree = "<group>";
@@ -127,8 +127,8 @@
 		74AD84AB20588FC300A0A547 /* GoalPage */ = {
 			isa = PBXGroup;
 			children = (
-				74AD84A520588F4700A0A547 /* GoalController.swift */,
 				74AD84A620588F4700A0A547 /* GoalPageCell.swift */,
+				748E1C1A205999F50058C971 /* GoalTableControler.swift */,
 			);
 			path = GoalPage;
 			sourceTree = "<group>";
@@ -272,12 +272,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				74AD84A320588F1100A0A547 /* OtherPageCell.swift in Sources */,
-				74AD84B2205890BE00A0A547 /* Persistance.swift in Sources */,
+				74AD84B2205890BE00A0A547 /* Persistence.swift in Sources */,
 				74AD84A820588F4700A0A547 /* GoalPageCell.swift in Sources */,
 				74AD84B02058909400A0A547 /* PickerController.swift in Sources */,
 				740B484620588C5800A839B6 /* Goal+CoreDataProperties.swift in Sources */,
 				740B484720588C5800A839B6 /* Goal+CoreDataClass.swift in Sources */,
-				74AD84A720588F4700A0A547 /* GoalController.swift in Sources */,
+				748E1C1B205999F50058C971 /* GoalTableControler.swift in Sources */,
 				746AB06420588BCA00D624CE /* AppDelegate.swift in Sources */,
 				74AD84A020588F1100A0A547 /* HistoryPageCell.swift in Sources */,
 				746AB06C20588BCA00D624CE /* KeepFit.xcdatamodeld in Sources */,

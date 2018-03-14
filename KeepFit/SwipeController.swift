@@ -9,6 +9,8 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
     let historyPageId = "history"
     let otherPageId = "other"
     
+    weak var swipeControllerDelegate: SwipeControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +31,10 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
         switch indexPath.row {
             
         case 2:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: goalPageId, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: goalPageId, for: indexPath) as! GoalPageCell
+            swipeControllerDelegate = cell.goalTableView
+            
+            return cell
             
         case 1:
             return collectionView.dequeueReusableCell(withReuseIdentifier: mainPageId, for: indexPath)
@@ -49,6 +54,8 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
             collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
             onceOnly = true
         }
+        
+        swipeControllerDelegate?.didScrollTo(indexPath: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -58,5 +65,9 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+}
+
+protocol SwipeControllerDelegate: class {
+    func didScrollTo(indexPath: IndexPath)
 }
 
