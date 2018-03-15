@@ -6,6 +6,7 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tableView.separatorStyle = .none
         tableView.rowHeight = 60
         tableView.allowsSelection = true
@@ -28,10 +29,11 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate {
         
         let goal = goals[indexPath.row]
         cell.progress = Float(goal.target) / Float(goal.current)
-        cell.textLabel?.text = "\(goal.name!), target: \(goal.target)"
+        cell.textLabel?.text = "\(goal.name!), target: \(goal.target) steps"
 
         return cell
     }
+    
     
     @objc func refresh() {
         goals = Persistence.getGoals()!

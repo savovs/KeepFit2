@@ -8,6 +8,7 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
     let mainPageId = "main"
     let historyPageId = "history"
     let otherPageId = "other"
+    let navTitles = ["History", "Track", "Goals"]
     
     weak var swipeControllerDelegate: SwipeControllerDelegate?
     
@@ -32,6 +33,8 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
             
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: goalPageId, for: indexPath) as! GoalPageCell
+            
+            // Let goal table know when it's scrolled to
             swipeControllerDelegate = cell.goalTableView
             
             return cell
@@ -52,10 +55,18 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
         if (!onceOnly) {
             let indexToScrollTo = IndexPath(item: 1, section: 0)
             collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+            navigationItem.title = navTitles[indexToScrollTo.row]
             onceOnly = true
         }
         
         swipeControllerDelegate?.didScrollTo(indexPath: indexPath)
+        
+    }
+    
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if let indexPath = collectionView!.indexPathsForVisibleItems.first {
+            navigationItem.title = navTitles[indexPath.row]
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

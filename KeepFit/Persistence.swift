@@ -72,5 +72,9 @@ public class Persistence {
         
         return nil
     }
+    
+    static func deleteGoal() {
+        
+    }
 }
 

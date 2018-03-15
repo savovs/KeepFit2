@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         layout.scrollDirection = .horizontal
         let swipeController = SwipeController(collectionViewLayout: layout)
         
-        window?.rootViewController = swipeController
+        window?.rootViewController = UINavigationController(rootViewController: swipeController)
         
         return true
     }
