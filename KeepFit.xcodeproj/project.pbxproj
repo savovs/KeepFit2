@@ -21,6 +21,8 @@
 		74AD84A820588F4700A0A547 /* GoalPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84A620588F4700A0A547 /* GoalPageCell.swift */; };
 		74AD84B02058909400A0A547 /* PickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84AF2058909400A0A547 /* PickerController.swift */; };
 		74AD84B2205890BE00A0A547 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD84B1205890BE00A0A547 /* Persistence.swift */; };
+		74D4D9F5205B0F9000633E67 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D4D9F4205B0F9000633E67 /* DetailViewController.swift */; };
+		74E11A18205B17C1007B35BD /* UICircularProgressRing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E11A19205B17C1007B35BD /* UICircularProgressRing.framework */; };
 		EBAFA10ED19F59803FA92425 /* Pods_KeepFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13426CA4F2B715FAF590CB80 /* Pods_KeepFit.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		74AD84A620588F4700A0A547 /* GoalPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoalPageCell.swift; path = /Users/vlady/Documents/GitHub/KeepFit/KeepFit/GoalPage/GoalPageCell.swift; sourceTree = "<absolute>"; };
 		74AD84AF2058909400A0A547 /* PickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerController.swift; path = KeepFit/PickerController.swift; sourceTree = SOURCE_ROOT; };
 		74AD84B1205890BE00A0A547 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		74D4D9F4205B0F9000633E67 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		74E11A19205B17C1007B35BD /* UICircularProgressRing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UICircularProgressRing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88292D7024D1D4B0A90AE7F3 /* Pods-KeepFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeepFit.release.xcconfig"; path = "Pods/Target Support Files/Pods-KeepFit/Pods-KeepFit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74E11A18205B17C1007B35BD /* UICircularProgressRing.framework in Frameworks */,
 				EBAFA10ED19F59803FA92425 /* Pods_KeepFit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,6 +75,7 @@
 		2DFCEE455B66958EC3D28D5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				74E11A19205B17C1007B35BD /* UICircularProgressRing.framework */,
 				13426CA4F2B715FAF590CB80 /* Pods_KeepFit.framework */,
 			);
 			name = Frameworks;
@@ -126,6 +132,7 @@
 			children = (
 				74AD84A620588F4700A0A547 /* GoalPageCell.swift */,
 				748E1C1A205999F50058C971 /* GoalTableControler.swift */,
+				74D4D9F4205B0F9000633E67 /* DetailViewController.swift */,
 			);
 			path = GoalPage;
 			sourceTree = "<group>";
@@ -249,11 +256,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KeepFit/Pods-KeepFit-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
+				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -267,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74D4D9F5205B0F9000633E67 /* DetailViewController.swift in Sources */,
 				74AD84A320588F1100A0A547 /* OtherPageCell.swift in Sources */,
 				74AD84B2205890BE00A0A547 /* Persistence.swift in Sources */,
 				74AD84A820588F4700A0A547 /* GoalPageCell.swift in Sources */,

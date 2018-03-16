@@ -8,7 +8,7 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
     let mainPageId = "main"
     let historyPageId = "history"
     let otherPageId = "other"
-    let navTitles = ["History", "Track", "Goals"]
+    let navTitles = ["Goals", "Track", "History"]
     
     weak var swipeControllerDelegate: SwipeControllerDelegate?
     
@@ -20,6 +20,8 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
         collectionView?.register(HistoryPageCell.self, forCellWithReuseIdentifier: historyPageId)
         collectionView?.register(OtherPageCell.self, forCellWithReuseIdentifier: otherPageId)
         collectionView?.isPagingEnabled = true
+        collectionView?.bounces = false
+        collectionView?.contentInsetAdjustmentBehavior = .never
     }
     
     // 3 pages in total
@@ -31,10 +33,11 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.row {
             
-        case 2:
+        case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: goalPageId, for: indexPath) as! GoalPageCell
+            cell.goalTableView.swipeIndexPathRow = indexPath.row
             
-            // Let goal table know when it's scrolled to
+            // Let goal table know when it's scrolled to so it can refresh
             swipeControllerDelegate = cell.goalTableView
             
             return cell
@@ -42,7 +45,7 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
         case 1:
             return collectionView.dequeueReusableCell(withReuseIdentifier: mainPageId, for: indexPath)
             
-        case 0:
+        case 2:
             return collectionView.dequeueReusableCell(withReuseIdentifier: historyPageId, for: indexPath)
             
         default:
@@ -62,7 +65,7 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
         swipeControllerDelegate?.didScrollTo(indexPath: indexPath)
         
     }
-    
+
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if let indexPath = collectionView!.indexPathsForVisibleItems.first {
             navigationItem.title = navTitles[indexPath.row]
@@ -70,7 +73,7 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: view.frame.width, height: floor(view.frame.height))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

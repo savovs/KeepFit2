@@ -2,6 +2,8 @@ import UIKit
 
 class GoalTableController : UITableViewController, SwipeControllerDelegate {
     private let cellId = "cell"
+    
+    var swipeIndexPathRow: Int?
     var goals: [Goal] = [Goal]()
 
     override func viewDidLoad() {
@@ -18,6 +20,10 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate {
             action: #selector(refresh),
             for: UIControlEvents.valueChanged
         )
+        
+        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
+        navigationItem.rightBarButtonItem = editButton
+//        navigationItem.
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,12 +34,35 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CustomTableCell
         
         let goal = goals[indexPath.row]
-        cell.progress = Float(goal.target) / Float(goal.current)
-        cell.textLabel?.text = "\(goal.name!), target: \(goal.target) steps"
+//        cell.progress = CGFloat(goal.current) / CGFloat(goal.target)
+        
+        cell.textLabel?.text = "\(goal.name!), current: \(goal.current), target: \(goal.target) steps"
 
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            Persistence.context.delete(goals[indexPath.row])
+            Persistence.saveContext()
+            
+            goals.remove(at: indexPath.row)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController()
+        detailViewController.goal = goals[indexPath.row]
+        
+        let appDelegate  = UIApplication.shared.delegate as! AppDelegate
+        let navigationController = appDelegate.window!.rootViewController as! UINavigationController
+
+        navigationController.pushViewController(detailViewController, animated: true)
+    }
     
     @objc func refresh() {
         goals = Persistence.getGoals()!
@@ -43,32 +72,27 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate {
             refreshControl?.endRefreshing()
         }
     }
-    
+
     func didScrollTo(indexPath: IndexPath) {
-        if (indexPath.row == 2) {
+        if (indexPath.row == swipeIndexPathRow) {
             refresh()
+        }
+    }
+    
+    @objc func toggleEditing() {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+
+        if (tableView.isEditing == true) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(toggleEditing))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(toggleEditing))
         }
     }
 }
 
 class CustomTableCell: UITableViewCell {
-    var progress: Float = 0
-
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        let progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.progress = progress
-        
-        addSubview(progressView)
-
-        NSLayoutConstraint.activate([
-            progressView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            progressView.leftAnchor.constraint(equalTo: textLabel!.leftAnchor),
-            progressView.rightAnchor.constraint(equalTo: textLabel!.rightAnchor),
-        ])
-
     }
     
     required init?(coder aDecoder: NSCoder) {

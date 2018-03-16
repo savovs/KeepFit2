@@ -6,6 +6,6 @@ target 'KeepFit' do
   use_frameworks!
 
 
-  pod 'SwipeCellKit'
+ pod 'UICircularProgressRing'
 
 end
