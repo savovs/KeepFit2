@@ -2,27 +2,10 @@ import CoreData
 
 public class Persistence {
     static var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
         let container = NSPersistentContainer(name: "KeepFit")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                fatalError("Unresolved persistence error \(error), \(error.userInfo)")
             }
         })
         
@@ -47,7 +30,7 @@ public class Persistence {
     }
     
     static func addGoal(name: String, target: Int16) -> Goal {
-        let goal = Goal(context: Persistence.context)
+        let goal = Goal(context: context)
 
         goal.name = name
         goal.target = target
@@ -58,20 +41,16 @@ public class Persistence {
         return goal
     }
     
-    static func getTracedGoal() {
-        
-    }
-    
-    static func getGoals() -> [Goal]? {
+    static func getGoals() -> [Goal] {
         let request = NSFetchRequest<Goal>(entityName: "Goal")
 
         do {
-            return try(Persistence.context.fetch(request)) as [Goal]
+            return try(context.fetch(request)) as [Goal]
         } catch let err {
             print(err)
         }
         
-        return nil
+        return [Goal]()
     }
     
     static func getTrackedGoal() -> Goal? {
@@ -79,7 +58,7 @@ public class Persistence {
         request.predicate = NSPredicate(format: "tracked == %@", true as CVarArg)
         
         do {
-            let goals = try(Persistence.context.fetch(request)) as [Goal]
+            let goals = try(context.fetch(request)) as [Goal]
 
             if (goals.count > 0) {
                 return goals[0]
@@ -93,8 +72,50 @@ public class Persistence {
         return nil
     }
     
+    static func addHistoryAction(type: HistoryAction.type, goal: Goal, amount: Int16 = 0) -> HistoryAction {
+        let action = HistoryAction(context: context)
+        let steps = "\(goal.current) / \(goal.target)"
+        
+        let texts: [HistoryAction.type: String] = [
+            .set: "Set a goal \(steps)",
+            .track: "Started tracking \(steps)",
+            .update: "Updated \(steps)",
+            .add: "Making +\(amount) progress \(steps)",
+            .subtract: "Walking -\(amount) backwards \(steps)",
+            .delete: "Deleted \(steps)",
+            .complete: "Yay, completed \(steps)"
+        ]
+        
+        action.text = texts[type] ?? ""
+        action.typeString = type.rawValue
+        action.date = NSDate()
+        
+        saveContext()
+        
+        return action
+    }
+    
+    static func getHistoryActions() -> [HistoryAction] {
+        let request = NSFetchRequest<HistoryAction>(entityName: "HistoryAction")
+        
+        do {
+            return try(context.fetch(request)) as [HistoryAction]
+        } catch let err {
+            print(err)
+        }
+        
+        return [HistoryAction]()
+    }
+    
     static func delete(object: NSManagedObject) {
         context.delete(object)
+        saveContext()
+    }
+    
+    static func clearHistory() {
+        let actions = getHistoryActions()
+        actions.forEach { context.delete($0) }
+        
         saveContext()
     }
 }

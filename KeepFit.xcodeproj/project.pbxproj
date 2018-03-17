@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74098868205CE7CF00B1B741 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74098867205CE7CF00B1B741 /* Colors.swift */; };
 		740B484620588C5800A839B6 /* Goal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740B484120588C5800A839B6 /* Goal+CoreDataProperties.swift */; };
 		740B484720588C5800A839B6 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740B484220588C5800A839B6 /* Goal+CoreDataClass.swift */; };
+		740FA7AA205CCB890086EE80 /* HistoryAction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740FA7A8205CCB890086EE80 /* HistoryAction+CoreDataClass.swift */; };
+		740FA7AB205CCB890086EE80 /* HistoryAction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740FA7A9205CCB890086EE80 /* HistoryAction+CoreDataProperties.swift */; };
 		746AB06420588BCA00D624CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746AB06320588BCA00D624CE /* AppDelegate.swift */; };
 		746AB06C20588BCA00D624CE /* KeepFit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 746AB06A20588BCA00D624CE /* KeepFit.xcdatamodeld */; };
 		746AB06E20588BCA00D624CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 746AB06D20588BCA00D624CE /* Assets.xcassets */; };
@@ -27,8 +30,11 @@
 /* Begin PBXFileReference section */
 		13426CA4F2B715FAF590CB80 /* Pods_KeepFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeepFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		184EB68C8E2CD8A39A1884DE /* Pods-KeepFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeepFit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KeepFit/Pods-KeepFit.debug.xcconfig"; sourceTree = "<group>"; };
+		74098867205CE7CF00B1B741 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		740B484120588C5800A839B6 /* Goal+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		740B484220588C5800A839B6 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = "<group>"; };
+		740FA7A8205CCB890086EE80 /* HistoryAction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryAction+CoreDataClass.swift"; sourceTree = "<group>"; };
+		740FA7A9205CCB890086EE80 /* HistoryAction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryAction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		746AB06020588BCA00D624CE /* KeepFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		746AB06320588BCA00D624CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		746AB06B20588BCA00D624CE /* KeepFit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KeepFit.xcdatamodel; sourceTree = "<group>"; };
@@ -98,6 +104,8 @@
 		746AB06220588BCA00D624CE /* KeepFit */ = {
 			isa = PBXGroup;
 			children = (
+				740FA7A8205CCB890086EE80 /* HistoryAction+CoreDataClass.swift */,
+				740FA7A9205CCB890086EE80 /* HistoryAction+CoreDataProperties.swift */,
 				74AD84AA20588FB800A0A547 /* Main */,
 				740B484220588C5800A839B6 /* Goal+CoreDataClass.swift */,
 				740B484120588C5800A839B6 /* Goal+CoreDataProperties.swift */,
@@ -120,6 +128,7 @@
 				74AD84AF2058909400A0A547 /* PickerController.swift */,
 				74AD849C20588F1100A0A547 /* TrackController.swift */,
 				74AD849F20588F1100A0A547 /* SwipeController.swift */,
+				74098867205CE7CF00B1B741 /* Colors.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -255,11 +264,14 @@
 				74D4D9F5205B0F9000633E67 /* DetailViewController.swift in Sources */,
 				74AD84B2205890BE00A0A547 /* Persistence.swift in Sources */,
 				74AD84B02058909400A0A547 /* PickerController.swift in Sources */,
+				74098868205CE7CF00B1B741 /* Colors.swift in Sources */,
 				740B484620588C5800A839B6 /* Goal+CoreDataProperties.swift in Sources */,
 				740B484720588C5800A839B6 /* Goal+CoreDataClass.swift in Sources */,
 				748E1C1B205999F50058C971 /* GoalTableControler.swift in Sources */,
+				740FA7AB205CCB890086EE80 /* HistoryAction+CoreDataProperties.swift in Sources */,
 				746AB06420588BCA00D624CE /* AppDelegate.swift in Sources */,
 				74AD84A020588F1100A0A547 /* HistoryController.swift in Sources */,
+				740FA7AA205CCB890086EE80 /* HistoryAction+CoreDataClass.swift in Sources */,
 				746AB06C20588BCA00D624CE /* KeepFit.xcdatamodeld in Sources */,
 				74AD84A420588F1100A0A547 /* SwipeController.swift in Sources */,
 				74AD84A120588F1100A0A547 /* TrackController.swift in Sources */,

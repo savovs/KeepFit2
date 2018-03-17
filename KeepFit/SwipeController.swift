@@ -67,8 +67,12 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
         }
         
         // Let delegates know which page is scrolled to they can refresh
-        delegates.forEach {
-            $0.didScrollTo(indexPath: indexPath)
+        delegates[indexPath.row].didScrollTo()
+        
+        if (indexPath.row == 2) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearButtonTapped))
+        } else {
+            navigationItem.rightBarButtonItem = nil
         }
         
     }
@@ -86,9 +90,14 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
+    @objc func clearButtonTapped() {
+        Persistence.clearHistory()
+        historyController.refresh()
+    }
 }
 
 protocol SwipeControllerDelegate: class {
-    func didScrollTo(indexPath: IndexPath)
+    func didScrollTo()
 }
 

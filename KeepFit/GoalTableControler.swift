@@ -11,7 +11,7 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate, Deta
         tableView.separatorStyle = .none
         tableView.rowHeight = 60
         tableView.allowsSelection = true
-        tableView.register(CustomTableCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(
@@ -28,12 +28,11 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate, Deta
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CustomTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         let goal = goals[indexPath.row]
-        
 
         cell.textLabel?.text = "\(goal.name) \(goal.current) / \(goal.target) steps"
-        cell.backgroundColor = goal.tracked ? UIColor(red: 165 / 255, green: 236 / 255, blue: 215 / 255, alpha: 1) : .white
+        cell.backgroundColor = goal.tracked ? .niceYellow : .white
 
         return cell
     }
@@ -55,7 +54,7 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate, Deta
     }
     
     @objc func refresh() {
-        goals = Persistence.getGoals()!
+        goals = Persistence.getGoals()
         self.tableView.reloadData()
         
         if (refreshControl!.isRefreshing) {
@@ -63,10 +62,8 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate, Deta
         }
     }
 
-    func didScrollTo(indexPath: IndexPath) {
-        if (indexPath.row == 0) {
-            refresh()
-        }
+    func didScrollTo() {
+        refresh()
     }
     
     func detailDidSave(goal: Goal, index: Int) {
@@ -93,16 +90,6 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate, Deta
         
         Persistence.saveContext()
         tableView.reloadData()
-    }
-}
-
-class CustomTableCell: UITableViewCell {
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 

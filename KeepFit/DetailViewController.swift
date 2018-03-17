@@ -182,6 +182,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             
             delegate?.detailDidSave(goal: goal, index: tableIndex)
             Persistence.saveContext()
+            Persistence.addHistoryAction(type: .update, goal: goal)
         }
         
         navigationController?.popViewController(animated: true)
@@ -190,7 +191,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     @objc func deleteButtonPressed() {
         self.view.endEditing(true)
         delegate?.detailDidDelete(index: tableIndex)
+        Persistence.addHistoryAction(type: .delete, goal: goal)
         Persistence.delete(object: goal)
+
         navigationController?.popViewController(animated: true)
     }
     

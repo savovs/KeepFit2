@@ -75,26 +75,41 @@ class TrackController : UIViewController, SwipeControllerDelegate, GoalTableCont
         
         trackedGoal = Persistence.addGoal(name: "", target: numbers[index])
         
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
             self.descriptionTextView.text = "Goal: \(self.trackedGoal.current) / \(self.trackedGoal.target)"
             self.descriptionTextView.isHidden = false
             self.stepButtonStack.isHidden = false
             self.mainImageView.isHidden = true
             self.addGoalButton.isHidden = true
         }
+        
+        Persistence.addHistoryAction(type: .set, goal: trackedGoal)
     }
     
     @objc func addCurrentSteps() {
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
-
         let steps: Int16 = numbers[goalPickerView.selectedRow(inComponent: 0)]
         let newCurrentSteps = trackedGoal.current + steps
         trackedGoal.current = newCurrentSteps <= trackedGoal.target ? newCurrentSteps : trackedGoal.target
 
-        descriptionTextView.text = "Goal: \(trackedGoal.current) / \(trackedGoal.target)"
+        
         
         Persistence.saveContext()
+        
+        if (newCurrentSteps < trackedGoal.target) {
+            descriptionTextView.text = "Goal: \(trackedGoal.current) / \(trackedGoal.target)"
+            Persistence.addHistoryAction(type: .add, goal: trackedGoal, amount: steps)
+            
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+        } else {
+            descriptionTextView.text = "Goal complete: \(trackedGoal.target) steps!"
+            stepButtonStack.isHidden = true
+            addGoalButton.isHidden = false
+            Persistence.addHistoryAction(type: .complete, goal: trackedGoal)
+            
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+        }
     }
     
     
@@ -106,10 +121,10 @@ class TrackController : UIViewController, SwipeControllerDelegate, GoalTableCont
         let newCurrentSteps = trackedGoal.current - steps
         trackedGoal.current = newCurrentSteps > 0 ? newCurrentSteps : 0
         
-        
         descriptionTextView.text = "Goal: \(trackedGoal.current) / \(trackedGoal.target)"
         
         Persistence.saveContext()
+        Persistence.addHistoryAction(type: .subtract, goal: trackedGoal, amount: steps)
     }
 
     override func viewDidLoad() {
@@ -164,26 +179,32 @@ class TrackController : UIViewController, SwipeControllerDelegate, GoalTableCont
         
         if (isTracking) {
             descriptionTextView.text = "Goal: \(goal.current) / \(goal.target)"
+            Persistence.addHistoryAction(type: .track, goal: goal)
         }
     }
     
-    func didScrollTo(indexPath: IndexPath) {
-        print(indexPath.row)
-        if (indexPath.row == 1) {
-            refresh()
-        }
+    func didScrollTo() {
+        refresh()
     }
     
     func refresh() {
         if let goal = Persistence.getTrackedGoal() {
-            trackedGoal = goal
-            descriptionTextView.text = "Goal: \(trackedGoal.current) / \(trackedGoal.target)"
-            descriptionTextView.isHidden = false
-            addGoalButton.isHidden = true
+            if (goal.current < goal.target) {
+                trackedGoal = goal
+                descriptionTextView.text = "Goal: \(trackedGoal.current) / \(trackedGoal.target)"
+                descriptionTextView.isHidden = false
+                addGoalButton.isHidden = true
+            } else {
+                showAddGoalUI()
+            }
         } else {
-            descriptionTextView.isHidden = true
-            stepButtonStack.isHidden = true
-            addGoalButton.isHidden = false
+            showAddGoalUI()
         }
+    }
+    
+    func showAddGoalUI() {
+        descriptionTextView.isHidden = true
+        stepButtonStack.isHidden = true
+        addGoalButton.isHidden = false
     }
 }
