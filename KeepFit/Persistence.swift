@@ -50,7 +50,6 @@ public class Persistence {
         let goal = Goal(context: Persistence.context)
 
         goal.name = name
-        goal.current = Int16(arc4random_uniform(UInt32(target)))
         goal.target = target
         goal.tracked = true
         

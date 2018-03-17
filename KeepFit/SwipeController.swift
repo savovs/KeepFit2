@@ -6,13 +6,13 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
     
     let cellId = "cell"
     let navTitles = ["Goals", "Track", "History"]
-    
-    var delegates: [SwipeControllerDelegate] = [SwipeControllerDelegate]()
 
     let goalTableController = GoalTableController()
     let trackController = TrackController()
     let historyController = HistoryController()
-    
+
+    var delegates: [SwipeControllerDelegate] = [SwipeControllerDelegate]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
@@ -20,7 +20,7 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
         collectionView?.bounces = false
         collectionView?.contentInsetAdjustmentBehavior = .never
         
-        delegates.append(goalTableController)
+        delegates = [goalTableController, trackController, historyController]
     }
     
     // 3 pages in total
@@ -34,23 +34,20 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
             
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-            goalTableController.swipeIndexPathRow = indexPath.row
-            
-            // Let the main page know when a goal is tracked
-            goalTableController.goalTableControllerDelegate = trackController
-
             cell.addSubview(goalTableController.view)
             
+            goalTableController.goalTableControllerDelegate = trackController
+
             return cell
             
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
             cell.addSubview(trackController.view)
+
             return cell
             
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-            historyController.swipeIndexPathRow = indexPath.row
             cell.addSubview(historyController.view)
             
             return cell

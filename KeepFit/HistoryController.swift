@@ -1,33 +1,23 @@
 import UIKit
 
-class HistoryController : UIViewController {
-    var swipeIndexPathRow: Int?
-    
-    let descriptionTextView: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isScrollEnabled = false
-        textView.isEditable = false
-        textView.font = UIFont.boldSystemFont(ofSize: 18)
-        textView.textAlignment = .center
-        textView.text = "History"
-        //        textView.textColor = .white
-        
-        return textView
-    }()
-    
+class HistoryController : UIViewController, SwipeControllerDelegate {
     override func viewDidLoad() {
         setupLayout()
+        refresh()
     }
     
     private func setupLayout() {
-        view.addSubview(descriptionTextView)
+
+    }
+    
+    func didScrollTo(indexPath: IndexPath) {
+        if (indexPath.row == 2) {
+            refresh()
+        }
+    }
+    
+    func refresh() {
         
-        NSLayoutConstraint.activate([
-            descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            descriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            descriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor),
-        ])
     }
 }
 

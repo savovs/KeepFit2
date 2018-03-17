@@ -2,7 +2,7 @@ import UIKit
 
 let numbers: [Int16] = [50, 100, 500, 1000, 2000, 3000, 4000, 5000]
 
-class TrackController : UIViewController, GoalTableControllerDelegate {
+class TrackController : UIViewController, SwipeControllerDelegate, GoalTableControllerDelegate {
     var trackedGoal: Goal!
     var isTrackingGoal: Bool = false
 
@@ -114,16 +114,7 @@ class TrackController : UIViewController, GoalTableControllerDelegate {
 
     override func viewDidLoad() {
         setupLayout()
-
-        if let goal = Persistence.getTrackedGoal() {
-            trackedGoal = goal
-            descriptionTextView.text = "Goal: \(trackedGoal.current) / \(trackedGoal.target)"
-            descriptionTextView.isHidden = false
-            addGoalButton.isHidden = true
-        } else {
-            descriptionTextView.isHidden = true
-            stepButtonStack.isHidden = true
-        }
+        refresh()
     }
     
     private func setupLayout() {
@@ -173,6 +164,26 @@ class TrackController : UIViewController, GoalTableControllerDelegate {
         
         if (isTracking) {
             descriptionTextView.text = "Goal: \(goal.current) / \(goal.target)"
+        }
+    }
+    
+    func didScrollTo(indexPath: IndexPath) {
+        print(indexPath.row)
+        if (indexPath.row == 1) {
+            refresh()
+        }
+    }
+    
+    func refresh() {
+        if let goal = Persistence.getTrackedGoal() {
+            trackedGoal = goal
+            descriptionTextView.text = "Goal: \(trackedGoal.current) / \(trackedGoal.target)"
+            descriptionTextView.isHidden = false
+            addGoalButton.isHidden = true
+        } else {
+            descriptionTextView.isHidden = true
+            stepButtonStack.isHidden = true
+            addGoalButton.isHidden = false
         }
     }
 }

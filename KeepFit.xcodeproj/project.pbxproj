@@ -114,30 +114,14 @@
 		74AD84AA20588FB800A0A547 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				74AD84AB20588FC300A0A547 /* GoalPage */,
+				748E1C1A205999F50058C971 /* GoalTableControler.swift */,
+				74D4D9F4205B0F9000633E67 /* DetailViewController.swift */,
 				74AD849B20588F1100A0A547 /* HistoryController.swift */,
-				74AD84AC20588FD300A0A547 /* MainPage */,
+				74AD84AF2058909400A0A547 /* PickerController.swift */,
+				74AD849C20588F1100A0A547 /* TrackController.swift */,
 				74AD849F20588F1100A0A547 /* SwipeController.swift */,
 			);
 			name = Main;
-			sourceTree = "<group>";
-		};
-		74AD84AB20588FC300A0A547 /* GoalPage */ = {
-			isa = PBXGroup;
-			children = (
-				748E1C1A205999F50058C971 /* GoalTableControler.swift */,
-				74D4D9F4205B0F9000633E67 /* DetailViewController.swift */,
-			);
-			path = GoalPage;
-			sourceTree = "<group>";
-		};
-		74AD84AC20588FD300A0A547 /* MainPage */ = {
-			isa = PBXGroup;
-			children = (
-				74AD84AF2058909400A0A547 /* PickerController.swift */,
-				74AD849C20588F1100A0A547 /* TrackController.swift */,
-			);
-			path = MainPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

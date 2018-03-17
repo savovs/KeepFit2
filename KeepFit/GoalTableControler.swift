@@ -2,8 +2,6 @@ import UIKit
 
 class GoalTableController : UITableViewController, SwipeControllerDelegate, DetailViewControllerDelegate {
     private let cellId = "cell"
-    
-    var swipeIndexPathRow: Int?
     var goals: [Goal] = [Goal]()
     weak var goalTableControllerDelegate: GoalTableControllerDelegate?
 
@@ -66,7 +64,7 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate, Deta
     }
 
     func didScrollTo(indexPath: IndexPath) {
-        if (indexPath.row == swipeIndexPathRow) {
+        if (indexPath.row == 0) {
             refresh()
         }
     }
