@@ -1,10 +1,11 @@
 import UIKit
 
-class GoalTableController : UITableViewController, SwipeControllerDelegate {
+class GoalTableController : UITableViewController, SwipeControllerDelegate, DetailViewControllerDelegate {
     private let cellId = "cell"
     
     var swipeIndexPathRow: Int?
     var goals: [Goal] = [Goal]()
+    weak var goalTableControllerDelegate: GoalTableControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +22,7 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate {
             for: UIControlEvents.valueChanged
         )
         
-        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
-        navigationItem.rightBarButtonItem = editButton
-//        navigationItem.
+        tableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0);
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,36 +31,29 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CustomTableCell
-        
         let goal = goals[indexPath.row]
-//        cell.progress = CGFloat(goal.current) / CGFloat(goal.target)
         
-        cell.textLabel?.text = "\(goal.name!), current: \(goal.current), target: \(goal.target) steps"
+
+        cell.textLabel?.text = "\(goal.name) \(goal.current) / \(goal.target) steps"
+        cell.backgroundColor = goal.tracked ? UIColor(red: 165 / 255, green: 236 / 255, blue: 215 / 255, alpha: 1) : .white
 
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete) {
-            Persistence.context.delete(goals[indexPath.row])
-            Persistence.saveContext()
-            
-            goals.remove(at: indexPath.row)
-        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
         detailViewController.goal = goals[indexPath.row]
+        detailViewController.tableIndex = indexPath.row
+        
+        // Get notified when detail view saves / deletes
+        detailViewController.delegate = self
         
         let appDelegate  = UIApplication.shared.delegate as! AppDelegate
         let navigationController = appDelegate.window!.rootViewController as! UINavigationController
 
         navigationController.pushViewController(detailViewController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     @objc func refresh() {
@@ -79,14 +71,30 @@ class GoalTableController : UITableViewController, SwipeControllerDelegate {
         }
     }
     
-    @objc func toggleEditing() {
-        tableView.setEditing(!tableView.isEditing, animated: true)
-
-        if (tableView.isEditing == true) {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(toggleEditing))
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(toggleEditing))
+    func detailDidSave(goal: Goal, index: Int) {
+        goals[index] = goal
+        self.tableView.reloadData()
+    }
+    
+    func detailDidDelete(index: Int) {
+        goals.remove(at: index)
+        self.tableView.reloadData()
+    }
+    
+    func detailDidToggleTrack(index: Int) {
+        // Only one can be tracked at a time
+        goals = goals.enumerated().map { (i, goal) in
+            if (i == index) {
+                goalTableControllerDelegate?.didToggleTrackGoal(goal: goal, isTracking: goal.tracked)
+            } else {
+                goal.tracked = false
+            }
+            
+            return goal
         }
+        
+        Persistence.saveContext()
+        tableView.reloadData()
     }
 }
 
@@ -100,3 +108,6 @@ class CustomTableCell: UITableViewCell {
     }
 }
 
+protocol GoalTableControllerDelegate: class {
+    func didToggleTrackGoal(goal: Goal, isTracking: Bool)
+}

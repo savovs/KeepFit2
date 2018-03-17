@@ -17,8 +17,8 @@ extension Goal {
         return NSFetchRequest<Goal>(entityName: "Goal")
     }
 
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
     @NSManaged public var target: Int16
     @NSManaged public var current: Int16
-
+    @NSManaged public var tracked: Bool
 }

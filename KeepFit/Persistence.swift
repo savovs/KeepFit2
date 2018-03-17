@@ -40,21 +40,23 @@ public class Persistence {
             do {
                 try context.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                fatalError("Error saving context \(nserror), \(nserror.userInfo)")
             }
         }
     }
     
-    static func addGoal(name: String, target: Int16) {
+    static func addGoal(name: String, target: Int16) -> Goal {
         let goal = Goal(context: Persistence.context)
+
         goal.name = name
         goal.current = Int16(arc4random_uniform(UInt32(target)))
         goal.target = target
+        goal.tracked = true
         
         Persistence.saveContext()
+        
+        return goal
     }
     
     static func getTracedGoal() {
@@ -73,8 +75,28 @@ public class Persistence {
         return nil
     }
     
-    static func deleteGoal() {
+    static func getTrackedGoal() -> Goal? {
+        let request = NSFetchRequest<Goal>(entityName: "Goal")
+        request.predicate = NSPredicate(format: "tracked == %@", true as CVarArg)
         
+        do {
+            let goals = try(Persistence.context.fetch(request)) as [Goal]
+
+            if (goals.count > 0) {
+                return goals[0]
+            }
+
+            return nil
+        } catch let err {
+            print(err)
+        }
+        
+        return nil
+    }
+    
+    static func delete(object: NSManagedObject) {
+        context.delete(object)
+        saveContext()
     }
 }
 

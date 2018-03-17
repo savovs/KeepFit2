@@ -1,13 +1,17 @@
 import UIKit
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
+    var tableIndex: Int!
+
     var goal: Goal! {
         didSet {
-            title = "Goal: \(goal.name!)"
+            title = "Goal: \(goal.name)"
             
             nameTextView.text = goal.name
             currentStepsTextView.text = String(describing: goal.current)
             targetStepsTextView.text = String(describing: goal.target)
+            trackButton.tintColor = goal.tracked ? .black : .green
+            trackButton.setTitle(goal.tracked ? "Untrack" : "Track", for: .normal)
         }
     }
     
@@ -40,25 +44,46 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         return view
     }()
     
+    let trackButton: UIButton = {
+        let button = UIButton(type: .system)
+        
+        button.frame = CGRect(x: 0, y: 0, width: 100, height: 60)
+        button.setTitle("Track", for: .normal)
+        button.addTarget(self, action: #selector(trackButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     let saveButton: UIButton = {
         let button = UIButton(type: .system)
         
-        button.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
+        button.frame = CGRect(x: 0, y: 0, width: 100, height: 60)
         button.setTitle("Save", for: .normal)
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    let deleteButton: UIButton = {
+        let button = UIButton(type: .system)
+        
+        button.tintColor = .red
+        button.frame = CGRect(x: 0, y: 0, width: 100, height: 60)
+        button.setTitle("Delete", for: .normal)
+        button.addTarget(self, action: #selector(deleteButtonPressed), for: .touchUpInside)
         return button
     }()
     
     var bottomConstraint: NSLayoutConstraint?
     
     let bottomMargin: CGFloat = 40
+    
+    weak var delegate: DetailViewControllerDelegate?
 
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = .white
     }
     
     override func viewDidLoad() {
-        let subviews = [nameTextView, currentStepsTextView, targetStepsTextView, saveButton]
+        let subviews = [nameTextView, currentStepsTextView, targetStepsTextView, trackButton, saveButton, deleteButton]
         let stackView = UIStackView(arrangedSubviews: subviews)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -71,14 +96,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             if let textField = $0 as? UITextField {
                 textField.delegate = self
                 textField.borderStyle = .roundedRect
-                textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                textField.heightAnchor.constraint(equalToConstant: 60).isActive = true
             }
         }
 
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            stackView.heightAnchor.constraint(equalToConstant: 200),
+            stackView.heightAnchor.constraint(equalToConstant: 360),
         ])
         
         // Hide keyboard on tap away
@@ -112,7 +137,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             let isShowing = notification.name == .UIKeyboardWillShow
             let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as! CGRect
             
-            bottomConstraint?.constant = isShowing ? -(keyboardFrame.height + bottomMargin) : -bottomMargin
+            bottomConstraint?.constant = isShowing ? -(keyboardFrame.height + bottomMargin - 60) : -bottomMargin
             
             UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
@@ -130,9 +155,55 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         return true;
     }
     
+    @objc func trackButtonPressed() {
+        goal.tracked = !goal.tracked
+        trackButton.tintColor = goal.tracked ? .black : .green
+        trackButton.setTitle(goal.tracked ? "Untrack" : "Track", for: .normal)
+        delegate?.detailDidToggleTrack(index: tableIndex)
+    }
+
     @objc func saveButtonPressed() {
         self.view.endEditing(true)
-        // save context
+        
+        let newCurrentSteps = Int16(currentStepsTextView.text!) ?? 0
+        let newTargetSteps = Int16(targetStepsTextView.text!) ?? 0
+
+        // Save if changed
+        if (
+            goal.name != nameTextView.text ||
+            goal.current != newCurrentSteps ||
+            goal.target != newTargetSteps
+        ) {
+            goal.name = nameTextView.text!
+            
+            // Current steps can't be more than Target
+            goal.current = newCurrentSteps <= newTargetSteps ? newCurrentSteps : newTargetSteps
+            goal.target = newTargetSteps
+            
+            delegate?.detailDidSave(goal: goal, index: tableIndex)
+            Persistence.saveContext()
+        }
+        
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc func deleteButtonPressed() {
+        self.view.endEditing(true)
+        delegate?.detailDidDelete(index: tableIndex)
+        Persistence.delete(object: goal)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+
+        return textField.keyboardType == .numberPad ? newLength < 5 : newLength < 25
+    }
+}
+
+protocol DetailViewControllerDelegate: class {
+    func detailDidSave(goal: Goal, index: Int)
+    func detailDidDelete(index: Int)
+    func detailDidToggleTrack(index: Int)
 }

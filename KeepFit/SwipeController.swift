@@ -4,24 +4,23 @@ import UIKit
 class SwipeController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var onceOnly = false
     
-    let goalPageId = "goal"
-    let mainPageId = "main"
-    let historyPageId = "history"
-    let otherPageId = "other"
+    let cellId = "cell"
     let navTitles = ["Goals", "Track", "History"]
     
-    weak var swipeControllerDelegate: SwipeControllerDelegate?
+    var delegates: [SwipeControllerDelegate] = [SwipeControllerDelegate]()
+
+    let goalTableController = GoalTableController()
+    let trackController = TrackController()
+    let historyController = HistoryController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView?.register(GoalPageCell.self, forCellWithReuseIdentifier: goalPageId)
-        collectionView?.register(MainPageCell.self, forCellWithReuseIdentifier: mainPageId)
-        collectionView?.register(HistoryPageCell.self, forCellWithReuseIdentifier: historyPageId)
-        collectionView?.register(OtherPageCell.self, forCellWithReuseIdentifier: otherPageId)
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.isPagingEnabled = true
         collectionView?.bounces = false
         collectionView?.contentInsetAdjustmentBehavior = .never
+        
+        delegates.append(goalTableController)
     }
     
     // 3 pages in total
@@ -34,22 +33,30 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
         switch indexPath.row {
             
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: goalPageId, for: indexPath) as! GoalPageCell
-            cell.goalTableView.swipeIndexPathRow = indexPath.row
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+            goalTableController.swipeIndexPathRow = indexPath.row
             
-            // Let goal table know when it's scrolled to so it can refresh
-            swipeControllerDelegate = cell.goalTableView
+            // Let the main page know when a goal is tracked
+            goalTableController.goalTableControllerDelegate = trackController
+
+            cell.addSubview(goalTableController.view)
             
             return cell
             
         case 1:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: mainPageId, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+            cell.addSubview(trackController.view)
+            return cell
             
         case 2:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: historyPageId, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+            historyController.swipeIndexPathRow = indexPath.row
+            cell.addSubview(historyController.view)
+            
+            return cell
             
         default:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: otherPageId, for: indexPath)
+            return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         }
     }
     
@@ -62,7 +69,10 @@ class SwipeController : UICollectionViewController, UICollectionViewDelegateFlow
             onceOnly = true
         }
         
-        swipeControllerDelegate?.didScrollTo(indexPath: indexPath)
+        // Let delegates know which page is scrolled to they can refresh
+        delegates.forEach {
+            $0.didScrollTo(indexPath: indexPath)
+        }
         
     }
 
